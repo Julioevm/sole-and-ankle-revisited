@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { COLORS, WEIGHTS, QUERIES } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import Icon from '../Icon';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -12,7 +13,7 @@ const Header = () => {
   // For our mobile hamburger menu, we'll want to use a button
   // with an onClick handler, something like this:
   //
-  // <button onClick={() => setShowMobileMenu(true)}>
+  //
 
   return (
     <header>
@@ -28,8 +29,16 @@ const Header = () => {
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
+          <Side />
         </Nav>
-        <Side />
+        <MobileNav>
+          <Icon id="search"></Icon>
+          <Icon id="shopping-bag"></Icon>
+
+          <button onClick={() => setShowMobileMenu(true)}>
+            <Icon id="menu"></Icon>
+          </button>
+        </MobileNav>
       </MainHeader>
 
       <MobileMenu
@@ -52,6 +61,22 @@ const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+const MobileNav = styled.nav`
+  display: none;
+  gap: 48px;
+  margin: 0px 48px;
+  @media ${QUERIES.tabletAndDown} {
+    display: flex;
+  }
+
+  button {
+    all: unset;
+  }
 `;
 
 const Side = styled.div`
